@@ -806,7 +806,7 @@ Peer.prototype._initializeServerConnection = function() {
   var self = this;
   this.socket = new Socket(this.options.secure, this.options.host, this.options.port, this.options.path, this.options.key);
   this.socket.on('message', function(data) {
-    self._handleMessage(data);
+    self. _handleMessage(data);
   });
   this.socket.on('error', function(error) {
     self._abort('socket-error', error);
@@ -879,6 +879,14 @@ Peer.prototype._handleMessage = function(message) {
       this.emit('open', this.id);
       this.open = true;
       break;
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    case 'HOST': // You are a host.
+      this.emit('host', this.id);
+      break;
+    case 'JOIN': // You are a host and you got connection.
+      this.emit('join', message.id);
+      break;
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     case 'ERROR': // Server error.
       this._abort('server-error', payload.msg);
       break;

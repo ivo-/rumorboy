@@ -1,3 +1,9 @@
+Future:
+
+- https://github.com/cjb/serverless-webrtc/
+- http://www.html5rocks.com/en/tutorials/webrtc/basics/#toc-signaling
+- http://blog.printf.net/articles/2013/05/17/webrtc-without-a-signaling-server/
+
 ;; rumorboy.io
 ;;
 ;; Plug-in за GoogleChrome/Firefox, който добавя p2p чат върху всички страници,

@@ -1,14 +1,14 @@
 // =============================================================================
 // Dependencies
 
-var PeerServer = require('peer').PeerServer;
-
 var config = {
     port: 9000,
     path: '/main'
 };
 
-var database = {};
+var PeerServer = require('peer').PeerServer;
+var log        = console.log.bind(console);
+var database   = { domains: {}, hosts: {} };
 
 // =============================================================================
 // Server
@@ -16,10 +16,30 @@ var database = {};
 var server = PeerServer(config);
 console.log("Server started on port: " + config.port);
 
-server.on('connection', function (id, domain) {
-    console.log('User connected with #', id, domain);
+server.on('connection', function (id, domain, socket) {
+    if (!database.domains.hasOwnProperty(domain)) {
+        database.domains[domain] = socket;
+        database.hosts[id] = domain;
+
+        log("[" + id + "] Connected HOST for domain: " + domain);
+        socket.send(JSON.stringify({ type: 'HOST' }));
+    } else {
+        var socket = database.domains[domain];
+        socket.send(JSON.stringify({ type: 'JOIN', id: id}));
+
+        log("[" + id + "] Connected for: " + domain);
+    }
 });
 
 server.on('disconnect', function (id) {
-    console.log('User disconnected with #', id);
+    if (database.hosts[id] != null) {
+        var domain = database.hosts[id];
+
+        delete database.hosts[id];
+        delete database.domains[domain];
+
+        log("[" + id + "] Disconnected HOST for domain: " + domain);
+    } else {
+        log("[" + id + "] Disconnected.");
+    }
 });
