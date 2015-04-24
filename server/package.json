@@ -1,0 +1,22 @@
+{
+  "name": "Rumorboy",
+  "version": "1.0.0",
+  "description": "TODO",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ivo-/rumorboy.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ivo-/rumorboy/issues"
+  },
+  "homepage": "https://github.com/ivo-/rumorboy",
+  "dependencies": {
+    "peer": "^0.2.8"
+  }
+}
