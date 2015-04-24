@@ -1,8 +1,16 @@
 // =============================================================================
+// Framework
 
-var peer = new Peer('someid', {host: 'localhost', port: 9000, path: '/myapp'});
+var $ = function (selector) {
+    return document.querySelector(selector);
+};
 
-// var conn = peer.connect('another-peers-id');
+// =============================================================================
+
+var domain = document.domain;
+var peer   = new Peer({host: 'localhost', port: 9000, path: '/main'});
+
+// var conn = peer.connect('7xdvdpk4ndn29000');
 // conn.on('open', function(){
 //   conn.send('hi!');
 // });
