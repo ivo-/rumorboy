@@ -1,5 +1,5 @@
 (function (){
-    // =============================================================================
+    // =========================================================================
     // Framework
 
     var $ = function (selector) {
@@ -15,7 +15,7 @@
         return dest;
     };
 
-    // =============================================================================
+    // =========================================================================
     // APP
 
     var log = console.log.bind(console);
@@ -23,6 +23,7 @@
     function Rumorboy() {
         this.host = null;
         this.connections = {};
+        this.messages    = [];
         this.peer = null;
 
         this._init();
@@ -40,7 +41,6 @@
             this.peer.on('join', this.handleJoin.bind(this));
             this.peer.on('connection', this.handleConnection.bind(this));
         },
-
 
         /**
          * Get current UTC timestamp.
@@ -62,8 +62,8 @@
         broadcast: function (message) {
             var msgStr = JSON.stringify(message);
             for (var id in this.connections) {
-                if (!this.connections.hasOwnProperty(id)) return;
-                if (id === this.peer.id) return;
+                if (!this.connections.hasOwnProperty(id)) continue;
+                if (id === this.peer.id) continue;
 
                 var conn = this.connections[id].conn;
                 conn.send(msgStr);
@@ -76,22 +76,15 @@
         sendConnections: function(conn) {
             var connections = this.connections;
             for (var id in connections) {
-                if (!connections.hasOwnProperty(id)) return;
+                if (!connections.hasOwnProperty(id)) continue;
 
                 conn.send(JSON.stringify({
-                    type: "CONNECT",
-                    id: id,
-                    time: connections[id].time,
+                    id:     id,
+                    type:   "CONNECT",
+                    time:   connections[id].time,
                     isHost: id === this.host
                 }));
             }
-        },
-
-        /**
-         * TODO:
-         */
-        sendMessages: function(conn) {
-
         },
 
         /**
@@ -143,7 +136,52 @@
             this.connections[this.peer.id].time = time;
         },
 
-        // =========================================================================
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Messages
+
+        /**
+         * Send message to all connections
+         *
+         * @public
+         */
+        sendMessage: function(text) {
+            var message = {
+                id:   this.peer.id,
+                time: this.now(),
+                text: text
+            };
+
+            this.storeMessage(message);
+            this.broadcast({
+                type:    "MESSAGE",
+                payload: message
+            });
+        },
+
+        sendHistory: function(conn) {
+            conn.send(JSON.stringify({
+                type:    "CHAT_HISTORY",
+                payload: this.messages
+            }));
+        },
+
+        storeMessage: function(msg) {
+            this.messages.push(msg);
+            this.sortStoredMessages();
+        },
+
+        storeMessageBatch: function(batch) {
+            this.messages.push.apply(this.messages, batch);
+            this.sortStoredMessages();
+        },
+
+        sortStoredMessages: function() {
+            this.messages.sort(function(m, n) {
+                return m.time - n.time;
+            });
+        },
+
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Handlers
 
         handleHost: function() {
@@ -154,8 +192,12 @@
 
             log("I_AM_THE_HOST");
         },
+
         handleOpen: function() {
-            this.connections[this.peer.id] = {conn: this.peer, time: this.now()};
+            this.connections[this.peer.id] = {
+                conn: this.peer,
+                time: this.now()
+            };
             log("I_AM_ALIVE");
         },
 
@@ -168,7 +210,7 @@
                 this.connections[id] = {conn: conn, time: now};
                 this.broadcast({type: "CONNECT", id: id, time: now, isHost: false});
                 this.sendConnections(conn);
-                this.sendMessages(conn);
+                this.sendHistory(conn);
             }.bind(this));
 
             var leave = function() {
@@ -196,7 +238,6 @@
                     var isHost = data.isHost;
                     var time   = data.time;
                     var peer   = this.peer;
-                    var conn   = peer.connect(id);
 
                     if (isHost) {
                         this.host = id;
@@ -205,7 +246,10 @@
                     if (data.id === peer.id) {
                         // Set correct peer time based on host data.
                         this.setTime(data.time);
+                        return;
                     }
+
+                    var conn = peer.connect(id);
 
                     conn.on('open', function() {
                         this.connections[id] = {conn: conn, time: time};
@@ -225,7 +269,10 @@
 
                     break;
                 case "MESSAGE":
-                    // TODO: Add message
+                    this.storeMessage(data.payload);
+                    break;
+                case "CHAT_HISTORY":
+                    this.storeMessageBatch(data.payload);
                     break;
                 }
             }.bind(this));
