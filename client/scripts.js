@@ -26,6 +26,11 @@
         this.messages    = [];
         this.peer = null;
 
+        /**
+         * UI should define this to track updates on messages and connections.
+         */
+        this.handleChange = function(messages, connections){};
+
         this._init();
     };
 
@@ -179,6 +184,7 @@
             this.messages.sort(function(m, n) {
                 return m.time - n.time;
             });
+            this.handleChange(this.messages, this.connections);
         },
 
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
