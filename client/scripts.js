@@ -81,8 +81,8 @@
                 conn.send(JSON.stringify({
                     type: "CONNECT",
                     id: id,
-                    time: c.now,
-                    isHost: id === host
+                    time: connections[id].time,
+                    isHost: id === this.host
                 }));
             }
         },
@@ -194,6 +194,7 @@
                     var id     = data.id;
                     var isHost = data.isHost;
                     var time   = data.time;
+                    var peer   = this.peer;
                     var conn   = peer.connect(id);
 
                     if (isHost) {
