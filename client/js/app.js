@@ -7,7 +7,7 @@ var Rumorboy = require('./client');
 // =============================================================================
 // Exports
 
-var RB = window.Rumorboy = new Rumorboy();
+var RB;
 
 // =============================================================================
 // UI
@@ -20,12 +20,14 @@ var UI = React.createClass({
         };
     },
 
-    componentWillMount: function() {
+    componentDidMount: function() {
+        RB = window.Rumorboy = new Rumorboy();
         RB.handleChange = this.handleChange;
     },
 
     componentWillUnmount: function() {
         RB.handleChange = function() {};
+        RB.destroy();
     },
 
     handleChange: function(messages, connections) {
@@ -109,6 +111,7 @@ if (chrome.runtime && chrome.runtime.onMessage) {
         var app = document.getElementById(APP_ID);
 
         if(app) {
+            React.unmountComponentAtNode(app);
             document.body.removeChild(app);
         } else {
             app = document.createElement('div');

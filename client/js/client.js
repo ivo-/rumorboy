@@ -42,6 +42,10 @@ extend(Rumorboy.prototype, {
         this.peer.on('connection', this.handleConnection.bind(this));
     },
 
+    destroy: function() {
+        this.peer.destroy();
+    },
+
     /**
      * Get current UTC timestamp.
      */
