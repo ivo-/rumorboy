@@ -54,7 +54,7 @@ server.on('disconnect', function (id) {
         database.recent[domain] = true;
         setTimeout(function() {
             delete database.recent[domain];
-        }, 10000);
+        }, 5000);
 
         log("[" + id + "] Disconnected HOST for domain: " + domain);
     } else {
