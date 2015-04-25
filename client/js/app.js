@@ -109,6 +109,7 @@ if (chrome.runtime && chrome.runtime.onMessage) {
         if(request.type !== 'click') return;
 
         var app = document.getElementById(APP_ID);
+        sendResponse({activeIcon: !app});
 
         if(app) {
             React.unmountComponentAtNode(app);

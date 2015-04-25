@@ -1,6 +1,9 @@
 #RUMORBOY___ {
   /* HTML5 display-role reset for older browsers */
-  border: 2px solid; }
+  border: 2px solid;
+  position: fixed;
+  top: 0;
+  right: 0; }
   #RUMORBOY___ html, #RUMORBOY___ body, #RUMORBOY___ div, #RUMORBOY___ span, #RUMORBOY___ applet, #RUMORBOY___ object, #RUMORBOY___ iframe,
   #RUMORBOY___ h1, #RUMORBOY___ h2, #RUMORBOY___ h3, #RUMORBOY___ h4, #RUMORBOY___ h5, #RUMORBOY___ h6, #RUMORBOY___ p, #RUMORBOY___ blockquote, #RUMORBOY___ pre,
   #RUMORBOY___ a, #RUMORBOY___ abbr, #RUMORBOY___ acronym, #RUMORBOY___ address, #RUMORBOY___ big, #RUMORBOY___ cite, #RUMORBOY___ code,
