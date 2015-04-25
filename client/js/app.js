@@ -72,33 +72,30 @@ var UI = React.createClass({
     }
 });
 
+// =============================================================================
+// Extension
 
-var active = false;
+var APP_ID = 'RUMORBOY___';
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if(request.type !== 'click') return;
+if (chrome.runtime) {
+    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+        if(request.type !== 'click') return;
 
-  active = !active;
+        var app = document.getElementById(APP_ID);
 
-  var content;
+        if(app) {
+            document.body.removeChild(app);
+        } else {
+            app = document.createElement('div');
+            app.setAttribute('id', APP_ID);
+            document.body.appendChild(app);
 
-  if(active) {
-    content = document.createElement('div');
-    content.setAttribute('id', 'app');
-    content.innerHTML = 'hello world';
-    document.body.appendChild(content);
-
-    React.render(
-      <UI />,
-      content
-    );
-
-  } else {
-    content = document.getElementById('app');
-    document.body.removeChild(content);
-  }
-});
-
+            React.render(<UI />, app);
+        }
+    });
+} else {
+    React.render(<UI />, document.querySelector('#app'));
+}
 
 // =============================================================================
 // Tests
