@@ -1,0 +1,41 @@
+#RUMORBOY___ {
+  /* HTML5 display-role reset for older browsers */
+  border: 2px solid; }
+  #RUMORBOY___ html, #RUMORBOY___ body, #RUMORBOY___ div, #RUMORBOY___ span, #RUMORBOY___ applet, #RUMORBOY___ object, #RUMORBOY___ iframe,
+  #RUMORBOY___ h1, #RUMORBOY___ h2, #RUMORBOY___ h3, #RUMORBOY___ h4, #RUMORBOY___ h5, #RUMORBOY___ h6, #RUMORBOY___ p, #RUMORBOY___ blockquote, #RUMORBOY___ pre,
+  #RUMORBOY___ a, #RUMORBOY___ abbr, #RUMORBOY___ acronym, #RUMORBOY___ address, #RUMORBOY___ big, #RUMORBOY___ cite, #RUMORBOY___ code,
+  #RUMORBOY___ del, #RUMORBOY___ dfn, #RUMORBOY___ em, #RUMORBOY___ img, #RUMORBOY___ ins, #RUMORBOY___ kbd, #RUMORBOY___ q, #RUMORBOY___ s, #RUMORBOY___ samp,
+  #RUMORBOY___ small, #RUMORBOY___ strike, #RUMORBOY___ strong, #RUMORBOY___ sub, #RUMORBOY___ sup, #RUMORBOY___ tt, #RUMORBOY___ var,
+  #RUMORBOY___ b, #RUMORBOY___ u, #RUMORBOY___ i, #RUMORBOY___ center,
+  #RUMORBOY___ dl, #RUMORBOY___ dt, #RUMORBOY___ dd, #RUMORBOY___ ol, #RUMORBOY___ ul, #RUMORBOY___ li,
+  #RUMORBOY___ fieldset, #RUMORBOY___ form, #RUMORBOY___ label, #RUMORBOY___ legend,
+  #RUMORBOY___ table, #RUMORBOY___ caption, #RUMORBOY___ tbody, #RUMORBOY___ tfoot, #RUMORBOY___ thead, #RUMORBOY___ tr, #RUMORBOY___ th, #RUMORBOY___ td,
+  #RUMORBOY___ article, #RUMORBOY___ aside, #RUMORBOY___ canvas, #RUMORBOY___ details, #RUMORBOY___ embed,
+  #RUMORBOY___ figure, #RUMORBOY___ figcaption, #RUMORBOY___ footer, #RUMORBOY___ header, #RUMORBOY___ hgroup,
+  #RUMORBOY___ menu, #RUMORBOY___ nav, #RUMORBOY___ output, #RUMORBOY___ ruby, #RUMORBOY___ section, #RUMORBOY___ summary,
+  #RUMORBOY___ time, #RUMORBOY___ mark, #RUMORBOY___ audio, #RUMORBOY___ video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline; }
+  #RUMORBOY___ article, #RUMORBOY___ aside, #RUMORBOY___ details, #RUMORBOY___ figcaption, #RUMORBOY___ figure,
+  #RUMORBOY___ footer, #RUMORBOY___ header, #RUMORBOY___ hgroup, #RUMORBOY___ menu, #RUMORBOY___ nav, #RUMORBOY___ section {
+    display: block;
+    float: none; }
+  #RUMORBOY___ body {
+    line-height: 1; }
+  #RUMORBOY___ ol, #RUMORBOY___ ul {
+    list-style: none; }
+  #RUMORBOY___ blockquote, #RUMORBOY___ q {
+    quotes: none; }
+  #RUMORBOY___ blockquote:before, #RUMORBOY___ blockquote:after,
+  #RUMORBOY___ q:before, #RUMORBOY___ q:after {
+    content: '';
+    content: none; }
+  #RUMORBOY___ table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+
+/*# sourceMappingURL=style.css.map */

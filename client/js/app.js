@@ -66,8 +66,33 @@ var UI = React.createClass({
                 <div className="chat">
                     <h2>Messages</h2>
                     <ul> {messages} </ul>
+                    <MessageForm />
                 </div>
             </section>
+        );
+    }
+});
+
+var MessageForm = React.createClass({
+    shouldComponentUpdate: function() {
+        return false;
+    },
+    handleSubmit: function(e) {
+        e.preventDefault();
+        var text = this.refs.text.getDOMNode().value.trim();
+        if(!text) {
+            return;
+        }
+
+        RB.sendMessage(text);
+        this.refs.text.getDOMNode().value = '';
+    },
+    render: function() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <input type='text' ref='text'/>
+                <input type="submit" value="Send" />
+            </form>
         );
     }
 });
