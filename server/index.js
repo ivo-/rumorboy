@@ -44,6 +44,7 @@ server.on('disconnect', function (id) {
     }
 });
 
+// TODO: Wait 2s after host dead and then accept new hosts different than claim.
 server.on('host-claim', function(id, domain, socket) {
     if (!database.domains.hasOwnProperty(domain)) {
         log("[" + id + "] Trying to claim an owned domain: " + domain);
