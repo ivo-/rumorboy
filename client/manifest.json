@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+
+  "name": "Chat",
+  "description": "Rumorboys chat",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["dist/peer.js", "dist/bundle.js"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "permissions": ["activeTab"]
+}

@@ -73,10 +73,32 @@ var UI = React.createClass({
 });
 
 
-React.render(
-    <UI />,
-    document.getElementById('app')
-);
+var active = false;
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  if(request.type !== 'click') return;
+
+  active = !active;
+
+  var content;
+
+  if(active) {
+    content = document.createElement('div');
+    content.setAttribute('id', 'app');
+    content.innerHTML = 'hello world';
+    document.body.appendChild(content);
+
+    React.render(
+      <UI />,
+      content
+    );
+
+  } else {
+    content = document.getElementById('app');
+    document.body.removeChild(content);
+  }
+});
+
 
 // =============================================================================
 // Tests
