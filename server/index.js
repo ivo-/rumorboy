@@ -43,3 +43,15 @@ server.on('disconnect', function (id) {
         log("[" + id + "] Disconnected.");
     }
 });
+
+server.on('host-claim', function(id, domain, socket) {
+    if (!database.domains.hasOwnProperty(domain)) {
+        log("[" + id + "] Trying to claim an owned domain: " + domain);
+    } else {
+        database.domains[domain] = socket;
+        database.hosts[id] = domain;
+
+        log("[" + id + "] Connected HOST for domain: " + domain);
+        socket.send(JSON.stringify({ type: 'HOST' }));
+    }
+});
