@@ -41,7 +41,6 @@ var UI = React.createClass({
         for (var id in this.pockemons) {
             if (!connections[id]) {
                 Pokemon.freePokemon(this.pockemons[id]);
-                delete this.pockemons[id];
             }
         }
     },
