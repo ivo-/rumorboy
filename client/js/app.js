@@ -77,7 +77,7 @@ var UI = React.createClass({
 
 var APP_ID = 'RUMORBOY___';
 
-if (chrome.runtime) {
+if (chrome.runtime && chrome.runtime.onMessage) {
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         if(request.type !== 'click') return;
 
