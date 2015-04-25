@@ -53,7 +53,7 @@
          * Get the underling signaling web socket.
          */
         getSocket: function() {
-            this.socket = this.peer.socket._socket;
+            return this.peer.socket._socket;
         },
 
         /**

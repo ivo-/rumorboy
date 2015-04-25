@@ -44,15 +44,16 @@ server.on('disconnect', function (id) {
     }
 });
 
-// TODO: Wait 2s after host dead and then accept new hosts different than claim.
+// TODO: Wait 2s after host disconnects and then accept new hosts different than
+// claim.
 server.on('host-claim', function(id, domain, socket) {
-    if (!database.domains.hasOwnProperty(domain)) {
+    if (database.domains[domain]) {
         log("[" + id + "] Trying to claim an owned domain: " + domain);
     } else {
         database.domains[domain] = socket;
         database.hosts[id] = domain;
 
-        log("[" + id + "] Connected HOST for domain: " + domain);
+        log("[" + id + "] Claimed HOST for domain: " + domain);
         socket.send(JSON.stringify({ type: 'HOST' }));
     }
 });
