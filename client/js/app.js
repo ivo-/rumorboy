@@ -3,6 +3,7 @@
 
 var React = require('react');
 var Rumorboy = require('./client');
+var Pokemon = require('./pokemon');
 
 // =============================================================================
 // Exports
@@ -20,7 +21,8 @@ var UI = React.createClass({
         };
     },
 
-    componentDidMount: function() {
+    componentWillMount: function() {
+        this.pockemons = {};
         RB = window.Rumorboy = new Rumorboy();
         RB.handleChange = this.handleChange;
     },
@@ -35,13 +37,31 @@ var UI = React.createClass({
             messages: messages,
             connections: connections
         });
+
+        for (var id in this.pockemons) {
+            if (!connections[id]) {
+                Pokemon.freePokemon(this.pockemons[id]);
+                delete this.pockemons[id];
+            }
+        }
+    },
+
+    getPockemon: function(id) {
+        if (this.pockemons[id]) {
+            return this.pockemons[id];
+        }
+
+        return this.pockemons[id] = Pokemon.getPokemon();
     },
 
     render: function() {
         var messages = this.state.messages.map(function(msg, i){
+            var p = this.getPockemon(msg.id);
+
             return (
                 <li key={i} className="item">
-                    {msg.id} - {msg.time}: {msg.text}
+                    <div style={p.style}></div>
+                    {p.name} - {msg.time}: {msg.text}
                 </li>
             );
         }.bind(this));
