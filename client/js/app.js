@@ -16,6 +16,7 @@ var RB;
 var UI = React.createClass({
     getInitialState: function() {
         return {
+            connected: false,
             messages: [],
             connections: {}
         };
@@ -25,6 +26,10 @@ var UI = React.createClass({
         this.pockemons = {};
         RB = window.Rumorboy = new Rumorboy();
         RB.handleChange = this.handleChange;
+
+        RB.on('host-connected', function() {
+            this.setState({connected: true});
+        }.bind(this));
     },
 
     componentWillUnmount: function() {

@@ -14,6 +14,7 @@ var extend = function(dest, source) {
 // =========================================================================
 // APP
 
+var EventEmitter = require('events').EventEmitter;
 
 function Rumorboy() {
     this.host = null;
@@ -29,6 +30,7 @@ function Rumorboy() {
     this._init();
 };
 
+extend(Rumorboy.prototype, EventEmitter.prototype);
 extend(Rumorboy.prototype, {
     _init: function() {
         this.peer = new Peer({
@@ -199,6 +201,7 @@ extend(Rumorboy.prototype, {
             this.setCurrentTime(); // Host sets its own time and everybody else's.
         }
 
+        this.emit('host-connected');
         log("I_AM_THE_HOST");
     },
 
@@ -252,6 +255,7 @@ extend(Rumorboy.prototype, {
 
                 if (isHost) {
                     this.host = id;
+                    this.emit('host-connected');
                 }
 
                 if (data.id === peer.id) {
