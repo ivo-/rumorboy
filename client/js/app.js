@@ -59,7 +59,7 @@ var UI = React.createClass({
         return (
             <section>
                 <header className="heading">
-                   <h1>Rumorboy</h1>
+                  <h1>Rumorboy ({document.domain}) </h1>
                 </header>
                 <div className="connections">
                     <h2>Connections</h2>
