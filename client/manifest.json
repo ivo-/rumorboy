@@ -17,6 +17,7 @@
         {
             "matches": ["https://*/*", "http://*/*"],
             "js": ["dist/peer.js", "dist/bundle.js"],
+            "css": ["./css/style.css"],
             "run_at": "document_end"
         }
     ],

@@ -179,6 +179,10 @@ extend(Rumorboy.prototype, {
         this.messages.sort(function(m, n) {
             return m.time - n.time;
         });
+        this.emitChange();
+    },
+
+    emitChange: function() {
         this.handleChange(this.messages, this.connections);
     },
 
@@ -212,10 +216,12 @@ extend(Rumorboy.prototype, {
             this.broadcast({type: "CONNECT", id: id, time: now, isHost: false});
             this.sendConnections(conn);
             this.sendHistory(conn);
+            this.emitChange();
         }.bind(this));
 
         var leave = function() {
             delete this.connections[id];
+            this.emitChange();
             log("[" + id + "] LEAVED_ME_AS_HOST");
         }.bind(this);
 
@@ -254,11 +260,13 @@ extend(Rumorboy.prototype, {
 
                 conn.on('open', function() {
                     this.connections[id] = {conn: conn, time: time};
+                    this.emitChange();
                     log("[" + id + "] PEER_CONNECTED");
                 }.bind(this));
 
                 var leave = function() {
                     delete this.connections[id];
+                    this.emitChange();
                     log("[" + id + "] PEER_DISCONNECTED");
                     if (this.host === id) {
                         this.setNextHost();
