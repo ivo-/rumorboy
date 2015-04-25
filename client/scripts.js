@@ -126,6 +126,7 @@
             }
 
             this.host = oldestID;
+            log("[" + this.host +"] NEW_HOST");
         },
 
         /**
@@ -214,7 +215,7 @@
                     var leave = function() {
                         delete this.connections[id];
                         log("[" + id + "] PEER_DISCONNECTED");
-                        if (isHost) {
+                        if (this.host === id) {
                             this.setNextHost();
                         }
                     }.bind(this);

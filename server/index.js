@@ -44,8 +44,8 @@ server.on('disconnect', function (id) {
     }
 });
 
-// TODO: Wait 2s after host disconnects and then accept new hosts different than
-// claim.
+// TODO: Wait 2s after host disconnects and then accept new hosts different
+// than claim.
 server.on('host-claim', function(id, domain, socket) {
     if (database.domains[domain]) {
         log("[" + id + "] Trying to claim an owned domain: " + domain);
