@@ -123,7 +123,7 @@ var UI = React.createClass({
 
         if(!this.state.connected) {
             return (
-                    <div className={heading_classes}>
+                    <div className='heading closed'>
                     <img src={Assets.pathFor('images/spinner.gif')} alt='Loading'/>
                 </div>);
         }
