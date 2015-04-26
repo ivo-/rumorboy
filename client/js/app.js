@@ -38,6 +38,28 @@ var UI = React.createClass({
         RB.destroy();
     },
 
+    componentWillUpdate: function() {
+        if (!this.refs.messagesContainer) return;
+
+        var lastMsg = this.state.messages[this.state.messages.length - 1];
+        if (lastMsg && lastMsg.id === RB.peer.id) {
+            this.shouldScrolledBottom = true;
+        } else {
+            var elm = this.refs.messagesContainer.getDOMNode();
+            var delta = Math.abs(elm.scrollTop - (elm.scrollHeight - elm.clientHeight));
+            this.shouldScrolledBottom = delta < 4;
+        }
+    },
+
+    componentDidUpdate: function() {
+        if (!this.refs.messagesContainer) return;
+
+        var elm = this.refs.messagesContainer.getDOMNode();
+        if (this.shouldScrolledBottom) {
+            elm.scrollTop = elm.scrollHeight;
+        }
+    },
+
     handleChange: function(messages, connections) {
         this.setState({
             messages: messages,
@@ -113,7 +135,7 @@ var UI = React.createClass({
                     </div>
                 </div>
                 <div className={chat_classes}>
-                    <ul className="messages">{messages}</ul>
+                    <ul className="messages" ref="messagesContainer">{messages}</ul>
                     <MessageForm />
                 </div>
             </div>
@@ -125,16 +147,19 @@ var MessageForm = React.createClass({
     shouldComponentUpdate: function() {
         return false;
     },
+
     handleSubmit: function(e) {
         e.preventDefault();
-        var text = this.refs.text.getDOMNode().value.trim();
+        var elm = this.refs.text.getDOMNode();
+        var text = elm.value.trim();
         if(!text) {
             return;
         }
 
         RB.sendMessage(text);
-        this.refs.text.getDOMNode().value = '';
+        elm.value = '';
     },
+
     render: function() {
         return (
             <form onSubmit={this.handleSubmit}>
