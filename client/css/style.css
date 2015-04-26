@@ -5,11 +5,11 @@
   border-bottom-right-radius: 10px;
   position: fixed;
   top: 0;
-  right: 5px;
-  padding: 10px 30px;
+  right: 10px;
   background: #EEEEEE;
   z-index: 9999999;
-  width: 20%; }
+  width: 20%;
+  color: white; }
   #RUMORBOY___ html, #RUMORBOY___ body, #RUMORBOY___ div, #RUMORBOY___ span, #RUMORBOY___ applet, #RUMORBOY___ object, #RUMORBOY___ iframe,
   #RUMORBOY___ h1, #RUMORBOY___ h2, #RUMORBOY___ h3, #RUMORBOY___ h4, #RUMORBOY___ h5, #RUMORBOY___ h6, #RUMORBOY___ p, #RUMORBOY___ blockquote, #RUMORBOY___ pre,
   #RUMORBOY___ a, #RUMORBOY___ abbr, #RUMORBOY___ acronym, #RUMORBOY___ address, #RUMORBOY___ big, #RUMORBOY___ cite, #RUMORBOY___ code,
@@ -46,42 +46,79 @@
   #RUMORBOY___ table {
     border-collapse: collapse;
     border-spacing: 0; }
-  #RUMORBOY___ .heading h1 {
-    width: auto;
-    height: auto;
-    text-align: center;
-    display: block;
-    font-size: 140%;
-    font-weight: bold;
-    margin: 15px 0; }
-    #RUMORBOY___ .heading h1 em {
-      font-style: italic; }
-  #RUMORBOY___ .heading span {
-    display: inline; }
-  #RUMORBOY___ .connections h2 {
-    width: auto;
-    height: auto;
-    text-align: center;
-    display: block;
-    font-size: 120%;
-    margin: 8px 0; }
-  #RUMORBOY___ .chat h2 {
-    width: auto;
-    height: auto;
-    text-align: center;
-    display: block;
-    font-size: 120%;
-    font-weight: bold;
-    margin: 15px 0; }
-  #RUMORBOY___ .chat .avatar {
-    float: left;
-    margin: 0 10px 0 0; }
-  #RUMORBOY___ .chat li.item, #RUMORBOY___ .chat form {
-    text-align: initial;
-    clear: both; }
-  #RUMORBOY___ .chat li.item .user {
-    padding: 8px 0 0 0; }
-  #RUMORBOY___ .chat form {
-    margin-top: 10px; }
+  #RUMORBOY___ .hidden {
+    display: none; }
+  #RUMORBOY___ .heading.closed {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px; }
+  #RUMORBOY___ .heading {
+    padding: 5px 30px 14px 30px;
+    background-color: #00AFE8; }
+    #RUMORBOY___ .heading h1 {
+      width: auto;
+      height: auto;
+      text-align: left;
+      display: block;
+      font-size: 130%;
+      font-weight: bold;
+      margin: 0; }
+      #RUMORBOY___ .heading h1 em {
+        font-style: italic; }
+    #RUMORBOY___ .heading span {
+      display: inline; }
+    #RUMORBOY___ .heading .connections h2 {
+      width: auto;
+      height: auto;
+      text-align: left;
+      display: block;
+      font-size: 100%; }
+  #RUMORBOY___ .chat {
+    color: black; }
+    #RUMORBOY___ .chat .messages {
+      max-height: 400px;
+      overflow: auto; }
+      #RUMORBOY___ .chat .messages .message {
+        clear: none; }
+    #RUMORBOY___ .chat h2 {
+      width: auto;
+      height: auto;
+      text-align: center;
+      display: block;
+      font-size: 120%;
+      font-weight: bold;
+      margin: 15px 0; }
+    #RUMORBOY___ .chat .avatar {
+      float: left;
+      margin: 0 10px 0 0; }
+    #RUMORBOY___ .chat li.item, #RUMORBOY___ .chat form {
+      text-align: initial;
+      clear: both; }
+    #RUMORBOY___ .chat li.item {
+      padding: 0 10px; }
+      #RUMORBOY___ .chat li.item .user {
+        padding: 8px 0 0 0;
+        font-size: 110%; }
+      #RUMORBOY___ .chat li.item .time {
+        line-height: 17px;
+        font-size: 80%;
+        font-weight: bold; }
+    #RUMORBOY___ .chat form {
+      padding: 10px 20px 10px 20px;
+      margin: 8px 0; }
+      #RUMORBOY___ .chat form input {
+        box-sizing: border-box; }
+        #RUMORBOY___ .chat form input:first-child {
+          width: 75%;
+          line-height: 24px;
+          padding: 5px 10px 5px 10px; }
+        #RUMORBOY___ .chat form input:last-child {
+          line-height: 36px;
+          width: 25%;
+          background-color: #6CAE28;
+          border: none;
+          color: white;
+          font-weight: bold; }
+      #RUMORBOY___ .chat form input:focus {
+        outline: 0 none !important; }
 
 /*# sourceMappingURL=style.css.map */

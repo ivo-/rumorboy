@@ -19,7 +19,8 @@ var UI = React.createClass({
         return {
             connected: false,
             messages: [],
-            connections: {}
+            connections: {},
+            chat_hidden: true
         };
     },
 
@@ -50,6 +51,12 @@ var UI = React.createClass({
         }
     },
 
+    handleToggle: function() {
+        this.setState({
+            chat_hidden: !this.state.chat_hidden
+        });
+    },
+
     getPockemon: function(id) {
         if (this.pockemons[id]) {
             return this.pockemons[id];
@@ -66,13 +73,16 @@ var UI = React.createClass({
             return (
                 <li key={i} className="item">
                     <div className="avatar" style={p.style}></div>
-                    <div className="user">{p.name} - {time}:</div>
+                    <div className="user"><span className="time">[{time}]</span> {p.name}:</div>
                     <div className="message">{msg.text}</div>
                 </li>
             );
         }.bind(this));
 
-        var connections = [], id, conn;
+        var connections = [], id, conn,
+            chat_classes = 'chat',
+            heading_classes = 'heading';
+
         for (id in this.state.connections) {
             conn = this.state.connections[id];
             connections.push(
@@ -82,21 +92,28 @@ var UI = React.createClass({
             );
         }
 
+        if(this.state.chat_hidden) {
+            chat_classes    += " hidden";
+            heading_classes += " closed";
+        }
+
         if(!this.state.connected) {
-            return <img src={Assets.pathFor('images/spinner.gif')} alt='Loading'/>;
+            return (
+                    <div className={heading_classes}>
+                    <img src={Assets.pathFor('images/spinner.gif')} alt='Loading'/>
+                </div>);
         }
 
         return (
             <div>
-                <div className="heading">
+                <div className={heading_classes} onClick={this.handleToggle}>
                     <h1>Rumors at <em>{document.domain}</em></h1>
+                    <div className="connections">
+                        <h2>People online: {connections.length}</h2>
+                    </div>
                 </div>
-                <div className="connections">
-                    <h2>People online: {connections.length}</h2>
-                </div>
-                <div className="chat">
-                    <h2>Messages</h2>
-                    <ul>{messages}</ul>
+                <div className={chat_classes}>
+                    <ul className="messages">{messages}</ul>
                     <MessageForm />
                 </div>
             </div>
