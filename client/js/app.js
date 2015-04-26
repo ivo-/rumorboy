@@ -35,6 +35,8 @@ var UI = React.createClass({
     },
 
     componentWillUnmount: function() {
+        RB.removeAllListeners('change');
+        RB.removeAllListeners('host-connected');
         RB.destroy();
     },
 
