@@ -210,6 +210,8 @@ extend(Rumorboy.prototype, {
             conn: this.peer,
             time: this.now()
         };
+        this.emitChange();
+
         log("I_AM_ALIVE");
     },
 

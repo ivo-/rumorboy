@@ -1,7 +1,8 @@
+var Assets = require('./assets_helper');
 var WIDTH  = 48;
 var HEIGHT = 48;
 var LINE   = 13;
-var IMG    = (chrome && chrome.extension) ? chrome.extension.getURL('images/pokemons.png') : 'images/pokemons.png';
+var IMG    = Assets.pathFor('images/pokemons.png');
 
 var NAMES  = [
     "Bulbasaur",

@@ -4,6 +4,7 @@
 var React = require('react');
 var Rumorboy = require('./client');
 var Pokemon = require('./pokemon');
+var Assets = require('./assets_helper');
 
 // =============================================================================
 // Exports
@@ -80,6 +81,10 @@ var UI = React.createClass({
                     {id} - {conn.time}
                 </li>
             );
+        }
+
+        if(!this.state.connected) {
+            return <img src={Assets.pathFor('images/spinner.gif')} alt='Loading'/>;
         }
 
         return (
