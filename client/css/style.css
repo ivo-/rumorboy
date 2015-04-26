@@ -1,9 +1,15 @@
 #RUMORBOY___ {
+  /* RESET */
   /* HTML5 display-role reset for older browsers */
-  border: 2px solid;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   position: fixed;
   top: 0;
-  right: 0; }
+  right: 5px;
+  padding: 10px 30px;
+  background: #EEEEEE;
+  z-index: 9999999;
+  width: 20%; }
   #RUMORBOY___ html, #RUMORBOY___ body, #RUMORBOY___ div, #RUMORBOY___ span, #RUMORBOY___ applet, #RUMORBOY___ object, #RUMORBOY___ iframe,
   #RUMORBOY___ h1, #RUMORBOY___ h2, #RUMORBOY___ h3, #RUMORBOY___ h4, #RUMORBOY___ h5, #RUMORBOY___ h6, #RUMORBOY___ p, #RUMORBOY___ blockquote, #RUMORBOY___ pre,
   #RUMORBOY___ a, #RUMORBOY___ abbr, #RUMORBOY___ acronym, #RUMORBOY___ address, #RUMORBOY___ big, #RUMORBOY___ cite, #RUMORBOY___ code,
@@ -40,5 +46,42 @@
   #RUMORBOY___ table {
     border-collapse: collapse;
     border-spacing: 0; }
+  #RUMORBOY___ .heading h1 {
+    width: auto;
+    height: auto;
+    text-align: center;
+    display: block;
+    font-size: 140%;
+    font-weight: bold;
+    margin: 15px 0; }
+    #RUMORBOY___ .heading h1 em {
+      font-style: italic; }
+  #RUMORBOY___ .heading span {
+    display: inline; }
+  #RUMORBOY___ .connections h2 {
+    width: auto;
+    height: auto;
+    text-align: center;
+    display: block;
+    font-size: 120%;
+    margin: 8px 0; }
+  #RUMORBOY___ .chat h2 {
+    width: auto;
+    height: auto;
+    text-align: center;
+    display: block;
+    font-size: 120%;
+    font-weight: bold;
+    margin: 15px 0; }
+  #RUMORBOY___ .chat .avatar {
+    float: left;
+    margin: 0 10px 0 0; }
+  #RUMORBOY___ .chat li.item, #RUMORBOY___ .chat form {
+    text-align: initial;
+    clear: both; }
+  #RUMORBOY___ .chat li.item .user {
+    padding: 8px 0 0 0; }
+  #RUMORBOY___ .chat form {
+    margin-top: 10px; }
 
 /*# sourceMappingURL=style.css.map */

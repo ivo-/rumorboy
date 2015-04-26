@@ -1,7 +1,7 @@
-var WIDTH  = 96;
-var HEIGHT = 96;
+var WIDTH  = 48;
+var HEIGHT = 48;
 var LINE   = 13;
-var IMG    = './pokemons.png';
+var IMG    = (chrome && chrome.extension) ? chrome.extension.getURL('images/pokemons.png') : 'images/pokemons.png';
 
 var NAMES  = [
     "Bulbasaur",

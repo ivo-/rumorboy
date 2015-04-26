@@ -61,11 +61,13 @@ var UI = React.createClass({
     render: function() {
         var messages = this.state.messages.map(function(msg, i){
             var p = this.getPockemon(msg.id);
+            var time = new Date(msg.time).toLocaleTimeString('en-En', { hour12: false });
 
             return (
                 <li key={i} className="item">
-                    <div style={p.style}></div>
-                    {p.name} - {msg.time}: {msg.text}
+                    <div className="avatar" style={p.style}></div>
+                    <div className="user">{p.name} - {time}:</div>
+                    <div className="message">{msg.text}</div>
                 </li>
             );
         }.bind(this));
@@ -81,20 +83,19 @@ var UI = React.createClass({
         }
 
         return (
-            <section>
-                <header className="heading">
-                  <h1>Rumorboy ({document.domain}) </h1>
-                </header>
+            <div>
+                <div className="heading">
+                    <h1>Rumors at <em>{document.domain}</em></h1>
+                </div>
                 <div className="connections">
-                    <h2>Connections</h2>
-                    <ul> {connections} </ul>
+                    <h2>People online: {connections.length}</h2>
                 </div>
                 <div className="chat">
                     <h2>Messages</h2>
-                    <ul> {messages} </ul>
+                    <ul>{messages}</ul>
                     <MessageForm />
                 </div>
-            </section>
+            </div>
         );
     }
 });
