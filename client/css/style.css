@@ -8,8 +8,9 @@
   right: 10px;
   background: #EEEEEE;
   z-index: 9999999;
-  width: 20%;
-  color: white; }
+  width: 400px;
+  color: white;
+  font-size: 13px; }
   #RUMORBOY___ html, #RUMORBOY___ body, #RUMORBOY___ div, #RUMORBOY___ span, #RUMORBOY___ applet, #RUMORBOY___ object, #RUMORBOY___ iframe,
   #RUMORBOY___ h1, #RUMORBOY___ h2, #RUMORBOY___ h3, #RUMORBOY___ h4, #RUMORBOY___ h5, #RUMORBOY___ h6, #RUMORBOY___ p, #RUMORBOY___ blockquote, #RUMORBOY___ pre,
   #RUMORBOY___ a, #RUMORBOY___ abbr, #RUMORBOY___ acronym, #RUMORBOY___ address, #RUMORBOY___ big, #RUMORBOY___ cite, #RUMORBOY___ code,
@@ -51,9 +52,22 @@
   #RUMORBOY___ .heading.closed {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px; }
+    #RUMORBOY___ .heading.closed .chevron-up {
+      display: none; }
+    #RUMORBOY___ .heading.closed .chevron-down {
+      display: inline-block; }
   #RUMORBOY___ .heading {
     padding: 5px 30px 14px 30px;
-    background-color: #00AFE8; }
+    background-color: #00AFE8;
+    cursor: pointer; }
+    #RUMORBOY___ .heading .chevron-up, #RUMORBOY___ .heading .chevron-down {
+      position: absolute;
+      top: 20px;
+      right: 25px; }
+    #RUMORBOY___ .heading .chevron-up {
+      display: inline-block; }
+    #RUMORBOY___ .heading .chevron-down {
+      display: none; }
     #RUMORBOY___ .heading h1 {
       width: auto;
       height: auto;

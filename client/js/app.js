@@ -20,7 +20,7 @@ var UI = React.createClass({
             connected: false,
             messages: [],
             connections: {},
-            chat_hidden: true
+            chat_hidden: false
         };
     },
 
@@ -129,7 +129,11 @@ var UI = React.createClass({
         return (
             <div>
                 <div className={heading_classes} onClick={this.handleToggle}>
-                    <h1>Rumors at <em>{document.domain}</em></h1>
+                    <h1>
+                        Rumors at <em>{document.domain}</em>
+                        <img className='chevron-up' src={Assets.pathFor('images/chevron-up.png')} alt='chevron-up'/>
+                        <img className='chevron-down' src={Assets.pathFor('images/chevron-down.png')} alt='chevron-down'/>
+                    </h1>
                     <div className="connections">
                         <h2>People online: {connections.length}</h2>
                     </div>
