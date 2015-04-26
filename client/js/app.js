@@ -26,15 +26,14 @@ var UI = React.createClass({
     componentWillMount: function() {
         this.pockemons = {};
         RB = window.Rumorboy = new Rumorboy();
-        RB.handleChange = this.handleChange;
 
+        RB.on('change', this.handleChange);
         RB.on('host-connected', function() {
             this.setState({connected: true});
         }.bind(this));
     },
 
     componentWillUnmount: function() {
-        RB.handleChange = function() {};
         RB.destroy();
     },
 

@@ -72,8 +72,23 @@ extend(Rumorboy.prototype, {
             if (id === this.peer.id) continue;
 
             var conn = this.connections[id].conn;
+            if (!conn) continue;
+
             conn.send(msgStr);
         }
+    },
+
+    /**
+     * Get user id by its connection object.
+     */
+    getSourceConnId: function(conn) {
+        for (var id in this.connections) {
+            if (this.connections[id].source === conn) {
+                return id;
+            }
+        }
+
+        return null;
     },
 
     /**
@@ -85,10 +100,9 @@ extend(Rumorboy.prototype, {
             if (!connections.hasOwnProperty(id)) continue;
 
             conn.send(JSON.stringify({
-                id:     id,
-                type:   "CONNECT",
-                time:   connections[id].time,
-                isHost: id === this.host
+                id:   id,
+                type: "CONNECT",
+                time: connections[id].time
             }));
         }
     },
@@ -99,7 +113,6 @@ extend(Rumorboy.prototype, {
      * this.
      */
     setNextHost: function() {
-        var claim = JSON.stringify({type: 'HOST_CLAIM'});
         var connections = this.connections;
         var oldest = null;
         var oldestID = null;
@@ -121,7 +134,7 @@ extend(Rumorboy.prototype, {
         }
 
         if (oldestID === this.peer.id) {
-            this.getSocket().send(claim);
+            this.getSocket().send(JSON.stringify({type: 'HOST_CLAIM'}));
         }
 
         this.host = oldestID;
@@ -189,7 +202,7 @@ extend(Rumorboy.prototype, {
     },
 
     emitChange: function() {
-        this.handleChange(this.messages, this.connections);
+        this.emit('change', this.messages, this.connections);
     },
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -207,8 +220,9 @@ extend(Rumorboy.prototype, {
 
     handleOpen: function() {
         this.connections[this.peer.id] = {
-            conn: this.peer,
-            time: this.now()
+            conn:   this.peer,
+            source: this.peer,
+            time:   this.now()
         };
         this.emitChange();
 
@@ -222,7 +236,7 @@ extend(Rumorboy.prototype, {
         conn.on('open', function() {
             var now = this.now();
             this.connections[id] = {conn: conn, time: now};
-            this.broadcast({type: "CONNECT", id: id, time: now, isHost: false});
+            this.broadcast({type: "CONNECT", id: id, time: now});
             this.sendConnections(conn);
             this.sendHistory(conn);
             this.emitChange();
@@ -240,8 +254,25 @@ extend(Rumorboy.prototype, {
         log("[" + id + "] JOINED_ME_AS_HOST");
     },
 
-    handleConnection: function(conn) {
-        conn.on('data', function(data) {
+    handleConnection: function(sourceConn) {
+        // First connection is always from the host.
+        if (this.host == null) {
+            this.host = sourceConn.peer;
+            this.emit('host-connected');
+        }
+
+        if (!this.connections[sourceConn.peer]) {
+            this.connections[sourceConn.peer] = {};
+        }
+
+        this.connections[sourceConn.peer].source = sourceConn;
+        this.emitChange();
+
+        sourceConn.on('close', function(data) {
+            delete this.connections[sourceConn.peer];
+        }.bind(this));
+
+        sourceConn.on('data', function(data) {
             log(data);
 
             if (typeof data === 'string') {
@@ -250,18 +281,17 @@ extend(Rumorboy.prototype, {
 
             switch(data.type) {
             case "CONNECT":
+                // Accept connect messages only from the host.
+                if (this.getSourceConnId(sourceConn) !== this.host) {
+                    return;
+                }
+
                 var id     = data.id;
-                var isHost = data.isHost;
                 var time   = data.time;
                 var peer   = this.peer;
 
-                if (isHost) {
-                    this.host = id;
-                    this.emit('host-connected');
-                }
-
-                if (data.id === peer.id) {
-                    // Set correct peer time based on host data.
+                // Set your correct peer time based on host data.
+                if (id === peer.id) {
                     this.setTime(data.time);
                     return;
                 }
@@ -269,7 +299,11 @@ extend(Rumorboy.prototype, {
                 var conn = peer.connect(id);
 
                 conn.on('open', function() {
-                    this.connections[id] = {conn: conn, time: time};
+                    this.connections[id] = {
+                        conn: conn,
+                        time: time,
+                        source: this.connections[id] && this.connections[id].source
+                    };
                     this.emitChange();
                     log("[" + id + "] PEER_CONNECTED");
                 }.bind(this));
@@ -287,11 +321,13 @@ extend(Rumorboy.prototype, {
                 conn.on('error', leave);
 
                 break;
+            case "CHAT_HISTORY":
+                if (this.getSourceConnId(sourceConn) === this.host) {
+                    this.storeMessageBatch(data.payload);
+                }
+                break;
             case "MESSAGE":
                 this.storeMessage(data.payload);
-                break;
-            case "CHAT_HISTORY":
-                this.storeMessageBatch(data.payload);
                 break;
             }
         }.bind(this));
