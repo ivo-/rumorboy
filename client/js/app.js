@@ -95,35 +95,35 @@ var UI = React.createClass({
             var time = new Date(msg.time).toLocaleTimeString('en-En', { hour12: false });
 
             return (
-                <li key={i} className="item">
-                    <div className="avatar" style={p.style}></div>
-                    <div className="user"><span className="time">[{time}]</span> {p.name}:</div>
-                    <div className="message">{msg.text}</div>
+                <li key={i} className="rumorboy-item">
+                    <div className="rumorboy-avatar" style={p.style}></div>
+                    <div className="rumorboy-user"><span className="rumorboy-time">[{time}]</span> {p.name}:</div>
+                    <div className="rumorboy-message">{msg.text}</div>
                 </li>
             );
         }.bind(this));
 
         var connections = [], id, conn,
-            chat_classes = 'chat',
-            heading_classes = 'heading';
+            chat_classes = 'rumorboy-chat',
+            heading_classes = 'rumorboy-heading';
 
         for (id in this.state.connections) {
             conn = this.state.connections[id];
             connections.push(
-                <li key={id} className="item">
+                <li key={id} className="rumorboy-item">
                     {id} - {conn.time}
                 </li>
             );
         }
 
         if(this.state.chat_hidden) {
-            chat_classes    += " hidden";
-            heading_classes += " closed";
+            chat_classes    += " rumorboy-hidden";
+            heading_classes += " rumorboy-closed";
         }
 
         if(!this.state.connected) {
             return (
-                    <div className='heading closed'>
+                    <div className='rumorboy-heading rumorboy-closed'>
                     <img src={Assets.pathFor('images/spinner.gif')} alt='Loading'/>
                 </div>);
         }
@@ -133,15 +133,15 @@ var UI = React.createClass({
                 <div className={heading_classes} onClick={this.handleToggle}>
                     <h1>
                         Rumors at <em>{document.domain}</em>
-                        <img className='chevron-up' src={Assets.pathFor('images/chevron-up.png')} alt='chevron-up'/>
-                        <img className='chevron-down' src={Assets.pathFor('images/chevron-down.png')} alt='chevron-down'/>
+                        <img className='rumorboy-chevron-up' src={Assets.pathFor('images/chevron-up.png')} alt='chevron-up'/>
+                        <img className='rumorboy-chevron-down' src={Assets.pathFor('images/chevron-down.png')} alt='chevron-down'/>
                     </h1>
-                    <div className="connections">
+                    <div className="rumorboy-connections">
                         <h2>People online: {connections.length}</h2>
                     </div>
                 </div>
                 <div className={chat_classes}>
-                    <ul className="messages" ref="messagesContainer">{messages}</ul>
+                    <ul className="rumorboy-messages" ref="messagesContainer">{messages}</ul>
                     <MessageForm />
                 </div>
             </div>

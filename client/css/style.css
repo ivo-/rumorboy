@@ -47,28 +47,28 @@
   #RUMORBOY___ table {
     border-collapse: collapse;
     border-spacing: 0; }
-  #RUMORBOY___ .hidden {
+  #RUMORBOY___ .rumorboy-hidden {
     display: none; }
-  #RUMORBOY___ .heading.closed {
+  #RUMORBOY___ .rumorboy-heading.rumorboy-closed {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px; }
-    #RUMORBOY___ .heading.closed .chevron-up {
+    #RUMORBOY___ .rumorboy-heading.rumorboy-closed .rumorboy-chevron-up {
       display: none; }
-    #RUMORBOY___ .heading.closed .chevron-down {
+    #RUMORBOY___ .rumorboy-heading.rumorboy-closed .rumorboy-chevron-down {
       display: inline-block; }
-  #RUMORBOY___ .heading {
+  #RUMORBOY___ .rumorboy-heading {
     padding: 5px 30px 14px 30px;
     background-color: #00AFE8;
     cursor: pointer; }
-    #RUMORBOY___ .heading .chevron-up, #RUMORBOY___ .heading .chevron-down {
+    #RUMORBOY___ .rumorboy-heading .rumorboy-chevron-up, #RUMORBOY___ .rumorboy-heading .rumorboy-chevron-down {
       position: absolute;
       top: 20px;
       right: 25px; }
-    #RUMORBOY___ .heading .chevron-up {
+    #RUMORBOY___ .rumorboy-heading .rumorboy-chevron-up {
       display: inline-block; }
-    #RUMORBOY___ .heading .chevron-down {
+    #RUMORBOY___ .rumorboy-heading .rumorboy-chevron-down {
       display: none; }
-    #RUMORBOY___ .heading h1 {
+    #RUMORBOY___ .rumorboy-heading h1 {
       width: auto;
       height: auto;
       text-align: left;
@@ -76,24 +76,24 @@
       font-size: 130%;
       font-weight: bold;
       margin: 0; }
-      #RUMORBOY___ .heading h1 em {
+      #RUMORBOY___ .rumorboy-heading h1 em {
         font-style: italic; }
-    #RUMORBOY___ .heading span {
+    #RUMORBOY___ .rumorboy-heading span {
       display: inline; }
-    #RUMORBOY___ .heading .connections h2 {
+    #RUMORBOY___ .rumorboy-heading .rumorboy-connections h2 {
       width: auto;
       height: auto;
       text-align: left;
       display: block;
       font-size: 100%; }
-  #RUMORBOY___ .chat {
+  #RUMORBOY___ .rumorboy-chat {
     color: black; }
-    #RUMORBOY___ .chat .messages {
+    #RUMORBOY___ .rumorboy-chat .rumorboy-messages {
       max-height: 400px;
       overflow: auto; }
-      #RUMORBOY___ .chat .messages .message {
+      #RUMORBOY___ .rumorboy-chat .rumorboy-messages .rumorboy-message {
         clear: none; }
-    #RUMORBOY___ .chat h2 {
+    #RUMORBOY___ .rumorboy-chat h2 {
       width: auto;
       height: auto;
       text-align: center;
@@ -101,38 +101,38 @@
       font-size: 120%;
       font-weight: bold;
       margin: 15px 0; }
-    #RUMORBOY___ .chat .avatar {
+    #RUMORBOY___ .rumorboy-chat .rumorboy-avatar {
       float: left;
       margin: 0 10px 0 0; }
-    #RUMORBOY___ .chat li.item, #RUMORBOY___ .chat form {
+    #RUMORBOY___ .rumorboy-chat li.rumorboy-item, #RUMORBOY___ .rumorboy-chat form {
       text-align: initial;
       clear: both; }
-    #RUMORBOY___ .chat li.item {
+    #RUMORBOY___ .rumorboy-chat li.rumorboy-item {
       padding: 0 10px; }
-      #RUMORBOY___ .chat li.item .user {
+      #RUMORBOY___ .rumorboy-chat li.rumorboy-item .rumorboy-user {
         padding: 8px 0 0 0;
         font-size: 110%; }
-      #RUMORBOY___ .chat li.item .time {
+      #RUMORBOY___ .rumorboy-chat li.rumorboy-item .rumorboy-time {
         line-height: 17px;
         font-size: 80%;
         font-weight: bold; }
-    #RUMORBOY___ .chat form {
+    #RUMORBOY___ .rumorboy-chat form {
       padding: 10px 20px 10px 20px;
       margin: 8px 0; }
-      #RUMORBOY___ .chat form input {
+      #RUMORBOY___ .rumorboy-chat form input {
         box-sizing: border-box; }
-        #RUMORBOY___ .chat form input:first-child {
+        #RUMORBOY___ .rumorboy-chat form input:first-child {
           width: 75%;
           line-height: 24px;
           padding: 5px 10px 5px 10px; }
-        #RUMORBOY___ .chat form input:last-child {
+        #RUMORBOY___ .rumorboy-chat form input:last-child {
           line-height: 36px;
           width: 25%;
           background-color: #6CAE28;
           border: none;
           color: white;
           font-weight: bold; }
-      #RUMORBOY___ .chat form input:focus {
+      #RUMORBOY___ .rumorboy-chat form input:focus {
         outline: 0 none !important; }
 
 /*# sourceMappingURL=style.css.map */
