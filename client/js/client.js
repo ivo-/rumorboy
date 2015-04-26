@@ -135,6 +135,8 @@ extend(Rumorboy.prototype, {
 
         if (oldestID === this.peer.id) {
             this.getSocket().send(JSON.stringify({type: 'HOST_CLAIM'}));
+        } else {
+            // TODO: What about host stealing?
         }
 
         this.host = oldestID;
