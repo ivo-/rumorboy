@@ -17,6 +17,11 @@ var server = PeerServer(config);
 console.log("Server started on port: " + config.port);
 
 server.on('connection', function handleConnection (id, domain, socket) {
+    if (socket.readyState !== 1) {
+        log("[" + id + "] Socket already closed");
+        return;
+    }
+
     if (!database.domains.hasOwnProperty(domain)) {
         // New connections cannot be pronounced as hosts until domain is removed
         // from recent list.
