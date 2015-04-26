@@ -148,7 +148,7 @@ if (chrome.runtime && chrome.runtime.onMessage) {
         }
     });
 } else {
-    React.render(<UI />, document.querySelector('#app'));
+    React.render(<UI />, document.querySelector('#' + APP_ID));
 }
 
 // =============================================================================
