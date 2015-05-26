@@ -260,7 +260,6 @@ extend(Rumorboy.prototype, {
         // First connection is always from the host.
         if (this.host == null) {
             this.host = sourceConn.peer;
-            this.emit('host-connected');
         }
 
         if (!this.connections[sourceConn.peer]) {
@@ -326,6 +325,7 @@ extend(Rumorboy.prototype, {
             case "CHAT_HISTORY":
                 if (this.getSourceConnId(sourceConn) === this.host) {
                     this.storeMessageBatch(data.payload);
+                    this.emit('host-connected');
                 }
                 break;
             case "MESSAGE":
